@@ -1,0 +1,36 @@
+name: kch_kovm
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.2.3 <4.0.0"
+
+dependencies:
+  change_app_package_name: ^1.1.0
+  flutter:
+    sdk: flutter
+  flutter_typeahead: ^4.1.1
+  intl: ^0.19.0
+  path: ^1.8.3
+  path_provider: ^2.1.2
+  percent_indicator: ^4.2.3
+  provider: ^6.1.1
+  sqflite: ^2.3.0
+  syncfusion_flutter_xlsio: ^24.1.46
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+    android: "launcher_icon"
+    ios: true
+    image_path: "assets/icon/icon.png"
+    min_sdk_android: 21  
+   
+
+flutter:
+  uses-material-design: true
