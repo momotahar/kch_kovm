@@ -91,7 +91,7 @@ class _StatsMoisState extends State<StatsMois> {
               child: ListView.builder(
                 itemCount: filteredDataByMonth.length,
                 itemBuilder: (context, index) {
-                  String monthName = DateFormat('MMM').format(
+                  String monthName = DateFormat('MMM','fr').format(
                       DateFormat('dd-MM-yyyy')
                           .parse(filteredDataByMonth[index]['dateJour']));
                   ligne = filteredDataByMonth[index]['ligne'];

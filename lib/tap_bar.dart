@@ -43,7 +43,7 @@ class _TapBarState extends State<TapBar> {
 
   @override
   void initState() {
-    formattedDate = DateFormat('dd-MMM-yyyy').format(currentDate);
+    formattedDate = DateFormat('dd-MMM-yyyy', 'fr').format(currentDate);
     // initFunctions();
     super.initState();
   }

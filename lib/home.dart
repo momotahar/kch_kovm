@@ -4,7 +4,7 @@ import 'package:kch_kovm/screens/service_rapport.dart';
 import 'package:kch_kovm/tap_bar.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -13,13 +13,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   DatabaseHelper dbHelper = DatabaseHelper();
   bool isChecked = false;
+
   Future<void> checkPriseService() async {
     var priseService = await dbHelper.getRapportForCurrentDate();
-    if (priseService!.isNotEmpty) {
-      isChecked = true;
-    } else {
-      isChecked = false;
-    }
+    setState(() {
+      isChecked = priseService!.isNotEmpty;
+    });
   }
 
   @override
