@@ -209,7 +209,7 @@ class _RapportScreenState extends State<RapportScreen> {
       ),
       validator: (value) {
         if (value!.isEmpty) {
-          return 'Enter $labelText';
+          return '$labelText?';
         }
         return null;
       },
