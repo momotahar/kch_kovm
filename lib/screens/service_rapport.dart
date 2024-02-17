@@ -32,7 +32,7 @@ class _RapportScreenState extends State<RapportScreen> {
   final TextEditingController vehiculeCtrl = TextEditingController();
   final TextEditingController kmsDepartCtrl = TextEditingController();
   final TextEditingController kmsFsCtrl = TextEditingController();
-  final TextEditingController observationsCtrl = TextEditingController();
+  final TextEditingController observationsCtrl = TextEditingController(text: "rien à signaler");
   final _formKey = GlobalKey<FormState>();
   String? dateJour;
   String? idRapport;

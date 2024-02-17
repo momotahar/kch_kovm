@@ -5,12 +5,14 @@ import 'package:intl/intl.dart';
 import 'package:kch_kovm/database/database_helper.dart';
 import 'package:kch_kovm/excel/feuille_route.dart';
 import 'package:kch_kovm/excel/stat_bus.dart';
+import 'package:kch_kovm/excel/stat_weekly.dart';
 import 'package:kch_kovm/provider/prise_service.dart';
 import 'package:kch_kovm/utils/build_home_button.dart';
 import 'package:kch_kovm/utils/build_scaffold_message.dart';
 import 'package:kch_kovm/utils/build_style_button.dart';
-import 'package:kch_kovm/excel/stat_weekly.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
+
 import '../../../models/ligne.dart';
 
 class ExcelDocScreen extends StatefulWidget {
@@ -41,6 +43,9 @@ class _ExcelDocScreenState extends State<ExcelDocScreen> {
   List<dynamic>? lignes;
   List<List<dynamic>> feuilleRoute = [];
   Ligne? ligne;
+
+  // Function to request permissions
+  Future<void> requestPermissions() async {}
 
 //Get equipe name from Provider
   Future<void> getEquipeToString() async {
@@ -200,16 +205,30 @@ class _ExcelDocScreenState extends State<ExcelDocScreen> {
           padding: const EdgeInsets.all(20.0),
           child: ElevatedButton(
             onPressed: () async {
-              createExcelFileFeuilleRoute(context, equipe!, feuilleRoute,
-                  priseService, depart, pause, finService, observations);
-              createExcelFileStatWeekly(context, equipe, listAgentData);
-              createExcelFileStatBusTram(context, equipe, statics);
-              buildScaffoldMessage(context, "Document Excel créé avec succès");
+              // Request external storage permission
+              var status = await Permission.storage.request();
+              if (status.isGranted) {
+                createExcelFileFeuilleRoute(context, equipe!, feuilleRoute,
+                    priseService, depart, pause, finService, observations);
+                createExcelFileStatWeekly(context, equipe, listAgentData);
+                createExcelFileStatBusTram(context, equipe, statics);
+                buildScaffoldMessage(
+                    context, "Document Excel créé avec succès");
+
+                print("Storage permission granted");
+              } else if (status.isDenied) {
+                // Permission denied, show a dialog or message to the user explaining why you need the permission
+                print("Storage permission denied");
+              } else if (status.isPermanentlyDenied) {
+                // Permission permanently denied, open app settings so the user can enable the permission manually
+                print("Storage permission permanently denied");
+                openAppSettings();
+              }
             },
             style: buildStyle(Colors.blueAccent, 200, 50),
             child: const Text(
               'Document Excel',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1)),
             ),
           ),
         ),

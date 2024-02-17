@@ -5,6 +5,7 @@ import 'package:kch_kovm/provider/prise_service.dart';
 import 'package:kch_kovm/screens/clean_table.dart';
 import 'package:kch_kovm/screens/excel_screen.dart';
 import 'package:kch_kovm/screens/feuille_route.dart';
+import 'package:kch_kovm/screens/file_picker.dart';
 import 'package:kch_kovm/screens/list_agents.dart';
 import 'package:kch_kovm/screens/montee.dart';
 import 'package:kch_kovm/screens/new_agent.dart';
@@ -104,6 +105,13 @@ class _TapBarState extends State<TapBar> {
                               builder: (context) => const ExcelDocScreen()),
                           (route) => false);
                       break;
+                    case 'Fichier':
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const FilePickerScreen()),
+                          (route) => false);
+                      break;
                     case 'Stockage':
                       Navigator.pushAndRemoveUntil(
                           context,
@@ -135,6 +143,9 @@ class _TapBarState extends State<TapBar> {
                     const PopupMenuDivider(), // Divider between items
                     buildPopupMenuItem(
                         'Excel', Icons.table_chart_outlined, 'Excel'),
+                    const PopupMenuDivider(), // Divider between items
+                    buildPopupMenuItem(
+                        'Fichier', Icons.file_download, 'Fichier'),
                     const PopupMenuDivider(), // Divider between items
                     buildPopupMenuItem('Stockage', Icons.settings, 'Stockage'),
                   ];
